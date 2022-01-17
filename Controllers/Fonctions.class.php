@@ -55,10 +55,10 @@ function ListeAnimes()
             echo'
                                 <br/><br/>' . $value->titre() . '
                                 <div></br>
-                                <a href="../Views/Recherche.php?code='. $value->codeAnime() . '"> <img style="width: 150px; height: 150px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
+                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 150px; height: 150px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
                                 </div>
                                 <div>
-                                    <a href="../Views/Recherche.php?code='. $value->codeAnime() . '"> <input type="button" value="Afficher" style="margin-top: 70px; width: 200px;" /> </a>
+                                    <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <input type="button" value="Afficher" style="margin-top: 70px; width: 200px;" /> </a>
                                 </div>
                         </div>
                     </br></br></br>';
@@ -81,11 +81,11 @@ function note($note)
 //Carousel Index
 
 //Achiffer resultat recherche
-function rechercheAnime()
+function recherche()
 {
     $bd = connection();
     $AnimeManager = new AnimeManager($bd);
-    $result = $AnimeManager->rechercheAnime($_GET["critere"]);
+    $result = $AnimeManager->recherche($_GET["critere"]);
     if ($result == null) {
         echo "<center><br/><br/><br/><h4>Aucun anime trouvé selon ce critère</center><h4>";
     } else {
@@ -93,17 +93,17 @@ function rechercheAnime()
         foreach ($result as $key =>$value) {
             echo '<div class="col" style="text-align: center;"><br/>';
             //Note
-            echo "Anime - " . note($value->note());
+            echo $value->type() . " - " . note($value->note());
 
             //Titre et Image
             echo'
                                 <br/><br/><b>' . $value->titre() . '</b>
                                 <div></br>
-                                <a href="../Views/Recherche.php?code='. $value->codeAnime() . '"> <img style="width: 200px; height: 200px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
+                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 200px; height: 200px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
                                 <br/><br/>Auteur : '. $value->auteur() . '
                                 </div>
                                 <div>
-                                    <a href=../Views/Recherche.php?code=' . $value->codeAnime() .'> <input type="button" value="Afficher" style="margin-top: 40px; width: 200px;" /> </a>
+                                    <a href=../Views/Recherche.php?code=' . $value->codeOeuvre() .'> <input type="button" value="Afficher" style="margin-top: 40px; width: 200px;" /> </a>
                                 </div>
                         </div>
                     </br></br></br>';
@@ -129,26 +129,35 @@ function afficherAnime()
                     ". $result[0]->titre() . "
             </U>
                 </h1>
-                </center>";
+                ";
         $form = "";
-        $form ='<div style="width: 1500px; margin-left: 100px;" >
 
-                <div style="width: 400px;float: left;margin-top: 50px ;">
+        $form ='<div style="width: 1550px; margin-left: 100px;" >
+
+                <div style="width: 400px;float: left;margin-top: 50px ; margin-right : 50px">
                     <img style="width: 500px; height:500px"  src="/dashboard/KAMW/Images/' . $result[0]->image() . '" alt="' . $result[0]->image() . '" /> 
                 </div>
 
-                <div style="width: 400px;float: left;margin-top: 50px ;height:600px"" class="shadow-lg p-3 mb-5 bg-body rounded">
+
+                <div style="width: 400px;float: left;margin-top: 50px ;height:500px" class="shadow-lg p-3 mb-5 bg-body rounded">
                     <table style=" height:500px">
                         <tr> <td style="text-align: right;"> Nom Auteur:</td>  <td>'  . $result[0]->auteur() . '</td> </tr>
                         <tr> <td style="text-align: right;"> Titre:</td>  <td> ' . $result[0]->titre() . '</td> </tr>
                         <tr> <td style="text-align: right;"> Note:</td>  <td>' . note($result[0]->note()) . '</td> </tr>
-                        <tr> <td colspan="2"><b>'.  $genre . '</b></td> </tr></table></div>
-                <div style="width: 700px;float: right;margin-top: 50px ;height:500px">
-                <div style=" height:300px">'.
-                $result[0]->synopsis() . '</div>
-                <div class="shadow-sm p-3 mb-5 bg-body rounded" style=" height:200px">' . $result[0]->resume() . '</div>
+                        <tr> <td colspan="2"><b>'.  $genre . '</b></td> </tr>
+                    </table>
                 </div>
-            </div><br/><br/>';
+
+
+                <div style="width: 400px;float: left;margin-top: 50px; margin-left: 50px;">
+                    <div style="vertical-align: top;">
+                    <h4>Synopsis</h4>'.
+                    $result[0]->synopsis() . '<hr/></div>
+
+                    <div class="shadow-sm p-3 mb-5 bg-body rounded" style="vertical-align: bottom;">
+                    <h4>Mon Resumé</h4>' . $result[0]->resume() . '</div>
+                    </div>
+                </div><br/><br/>';
         echo $form;
     }
 }
@@ -163,9 +172,10 @@ function genre()
     for ($i = 0; $i < count($genres); $i++) {
         //M'évitera d'avoir une virgule à la fin
         if ($i == (count($genres)-1)) {
-            $G .= $genres[$i]->genre();
+            $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>";
+            // '<a href="../Views/Recherche.php?critere=' . $genres[$i]->genre() . '</a>';
         } else {
-            $G .= $genres[$i]->genre(). ', ';
+            $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>" . ' - ';
         }
     }
     return $G;

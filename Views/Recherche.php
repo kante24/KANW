@@ -30,7 +30,7 @@ require("../Controllers/Fonctions.class.php");
                     <?php
                 //Recherche
                 if (isset($_GET["critere"])) {
-                    rechercheAnime();
+                    recherche();
                 }
 
                 //Afficher oeuvre selecionné

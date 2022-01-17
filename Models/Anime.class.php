@@ -3,8 +3,8 @@
 class Anime
 {
     private $_titre;
-    private $_codeAnime;
-    // private $_type;
+    private $_codeOeuvre;
+    private $_type;
     private $_synopsis;
     private $_resume;
     private $_critique;
@@ -24,9 +24,9 @@ class Anime
     {
         return $this->_titre;
     }
-    public function codeAnime()
+    public function codeOeuvre()
     {
-        return $this->_codeAnime;
+        return $this->_codeOeuvre;
     }
     public function synopsis()
     {
@@ -52,10 +52,10 @@ class Anime
     {
         return $this->_auteur;
     }
-    // public function type()
-    // {
-    //     return $this->_type;
-    // }
+    public function type()
+    {
+        return $this->_type;
+    }
 
 
     //definition des setters
@@ -63,10 +63,10 @@ class Anime
     {
         $this->_titre = $titre;
     }
-    // public function setType($type)
-    // {
-    //     $this->_type = $type;
-    // }
+    public function setType($type)
+    {
+        $this->_type = $type;
+    }
     public function setImage($image)
     {
         $this->_image = $image;
@@ -87,9 +87,9 @@ class Anime
     {
         $this->_synopsis = $synopsis;
     }
-    public function setCodeAnime($codeAnime)
+    public function setCodeOeuvre($codeOeuvre)
     {
-        $this->_codeAnime = $codeAnime;
+        $this->_codeOeuvre = $codeOeuvre;
     }
     public function setAuteur($auteur)
     {
