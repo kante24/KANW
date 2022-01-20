@@ -1,5 +1,6 @@
 <?php
 require("../Controllers/Fonctions.class.php");
+echo ajoutGenre();
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -15,6 +16,10 @@ require("../Controllers/Fonctions.class.php");
                 text-align: center;
             }
             
+            h4 {
+                background-color: white;
+            }
+            
             .row {
                 margin-top: 20px;
             }
@@ -27,90 +32,162 @@ require("../Controllers/Fonctions.class.php");
     </head>
 
     <body>
-        <?php require("../Views/haut.php");?>
+
+        <?php require("../Views/haut.php");
+
+        if (isset($_GET['ajout'])) {
+            if ($_GET['ajout'] == "true") {
+                ?>
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
-            <div class="container div" style="background-color: <?couleur() ?> ;border-radius: 50%;margin-top: 70px; text-align: center; width: 700px;">
+            <div class="container" style="background-color: <?couleur() ?> ;border-radius: 10%; margin-top: 70px;width:1000px; text-align: center;">
+
                 <div class="row">
 
-                    <div class="col form-floating">
-                        <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="titre" placeholder="Titre">
-                        <label for="floatingInput" style="text-align:center">TITRE</label>
-                    </div>
-                    <div class="col form-floating">
-                        <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="auteur" placeholder="AUTEUR">
-                        <label for="floatingInput" style="text-align:center">AUTEUR</label>
-                    </div>
+                    <div class="row">
+                        <div class="col textCenter">
+                            <h4 style="background-color:white">Genres</h4>
+                            <div class="row">
+                                <div class="col">
 
-                </div>
+                                    <div class="row">
+                                        <div class="col form-floating" style="margin-top:30px">
+                                            <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="genre" placeholder="GENRE">
+                                            <label for="floatingInput" style="text-align:center">GENRE À AJOUTER</label>
+                                        </div>
 
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="width: 200px;">
-                        <h6 style="background-color: white;">Type</h6>
-                        <select size="3" style="margin: 0 auto;text-align: center; width: 200px;" class="form-select" multiple aria-label="multiple select example" name="type">
-                    <option value="Anime" selected>Anime</option>
-                    <option value="Manga">Manga</option>
-                    <option value="Webtoon">Webtoon</option>
-                    </select>
-                    </div>
-                </div>
+                                        <div class="col form-floating" style="margin-top:30px">
+                                            <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutGenre">
+                                            Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
+                                        </button>
+                                        </div>
+                                    </div>
 
+                                    <div class="row">
+                                        <!-- <?echo genre() ?> -->
+                                        <div class="col textCenter" style="margin-top:30px">
+                                            <h4>
+                                                <?echo genre()?>
+                                            </h4>
+                                        </div>
+                                    </div>
 
-                <div class="row" style="margin: 0 auto;width: 200px; margin-top: 30px;">
-                    <h6 style="background-color: white;">Note en
-                        <?php echo note(1) ?>
-                    </h6>
-                    <select style="margin: 0 auto;text-align: center; width: 200px;" class="form-select" aria-label="Default select example" name="note">
-                        <option selected value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </select>
-                </div>
-
-                <div class="row" style="margin-top: 30px;">
-
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea name="synopsis" class="form-control" placeholder="Synopsys" id="floatingTextarea2" style="height: 150px"></textarea>
-                            <label for="floatingTextarea2">Synopsis</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea name="resume" class="form-control" placeholder="Mon Resumé" id="floatingTextarea2" style="height: 150px" name="resume"></textarea>
-                            <label for="floatingTextarea2">Mon Resumé</label>
-                        </div>
+
+                        <div class="col"></div>
                     </div>
 
-                </div>
 
-                <div class="row" style="margin: 0 auto;width: 400px; margin-top: 30px;">
+                    <div class="row"></div>
 
-                    <div class="col">
-                        <div class="form-floating">
-                            <textarea name="critique" class="form-control" placeholder="Critique" id="floatingTextarea2" style="height: 150px" name="critique"></textarea>
-                            <label for="floatingTextarea2">Critique</label>
-                        </div>
-                    </div>
 
-                </div>
-
-                <div class="row" style="margin: 0 auto; margin-top: 30px;">
-                    <div class="col">
-                        <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajout">
-                            Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-danger" type="submit" style="margin: 0 auto;width: 200px;" value="Effacer" name="effacer">
-                            Effacer  <img src="https://cdn-icons-png.flaticon.com/512/70/70287.png" style="width: 20px; height: 20px;";/>
-                        </button>
-                    </div>
                 </div>
             </div>
         </form>
+        <?php
+            } elseif ($_GET['ajout'] !== 'true') {
+                ?>
+            <script>
+                window.location.replace("/dashboard/KAMW/Views/AjoutOeuvre.php");
+            </script>
+            <?php
+            };
+        }
+        
+
+        if (!isset($_GET['ajout'])) {
+            ?>
+                <!-- form pour ajout -->
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+                    <div class="container div" style="background-color: <?couleur() ?> ;border-radius: 50%;margin-top: 70px; text-align: center; width: 700px;">
+                        <div class="row">
+
+                            <div class="col form-floating">
+                                <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="titre" placeholder="Titre">
+                                <label for="floatingInput" style="text-align:center">TITRE</label>
+                            </div>
+                            <div class="col form-floating">
+                                <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="auteur" placeholder="AUTEUR">
+                                <label for="floatingInput" style="text-align:center">AUTEUR</label>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col" style="width: 200px;">
+                                <h6 style="background-color: white;">Type</h6>
+                                <select size="3" style="margin: 0 auto;text-align: center; width: 200px;" class="form-select" multiple aria-label="multiple select example" name="type">
+        <option value="Anime" selected>Anime</option>
+    <option value="Manga">Manga</option>
+    <option value="Webtoon">Webtoon</option>
+    </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin: 0 auto;width: 200px; margin-top: 30px;">
+                            <h6 style="background-color: white;">Note en
+                                <?php echo note(1) ?>
+                            </h6>
+                            <select style="margin: 0 auto;text-align: center; width: 200px;" class="form-select" aria-label="Default select example" name="note">
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+                        </div>
+
+                        <div class="row" style="margin-top: 30px;">
+
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea name="synopsis" class="form-control" placeholder="Synopsys" id="floatingTextarea2" style="height: 150px"></textarea>
+                                    <label for="floatingTextarea2">Synopsis</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea name="resume" class="form-control" placeholder="Mon Resumé" id="floatingTextarea2" style="height: 150px" name="resume"></textarea>
+                                    <label for="floatingTextarea2">Mon Resumé</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="margin: 0 auto;width: 400px; margin-top: 30px;">
+
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea name="critique" class="form-control" placeholder="Critique" id="floatingTextarea2" style="height: 150px" name="critique"></textarea>
+                                    <label for="floatingTextarea2">Critique</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="margin: 0 auto; margin-top: 30px;">
+                            <div class="col">
+                                <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajout">
+            Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
+        </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-danger" type="submit" style="margin: 0 auto;width: 200px;" value="Effacer" name="effacer">
+            Effacer  <img src="https://cdn-icons-png.flaticon.com/512/70/70287.png" style="width: 20px; height: 20px;";/>
+        </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <?php
+        }
+       ?>
+
+
     </body>
 
     </html>
@@ -123,8 +200,9 @@ require("../Controllers/Fonctions.class.php");
         $Oeuvre=new Oeuvre(array("titre"=>$_POST['titre'], "codeOeuvre"=>$codeOeuvre, "synopsis"=>$_POST['synopsis'], "resume"=>$_POST['resume'], "critique"=> $_POST['critique'],  "note"=> $_POST['note'], "auteur"=> $_POST['auteur'], "type"=> $_POST['type'] ));
         if (ajoutOeuvre($Oeuvre) === true) {
             echo    '<script>
-                        window.location.replace("/dashboard/KAMW/Views/AjoutOeuvre.php?ajout=true");
+                        window.location.replace("/dashboard/KAMW/Views/AjoutOeuvre.php?ajout=true&code='. $codeOeuvre .'");
                     </script>';
         }
     }
+    
     ?>

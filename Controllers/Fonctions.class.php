@@ -176,19 +176,40 @@ function genre()
     $GenreManager = new GenreManager($db);
     $G = "";
     $genres = $GenreManager->genre($_GET["code"]);
-    for ($i = 0; $i < count($genres); $i++) {
-        //M'évitera d'avoir une virgule à la fin
-        if ($i == (count($genres)-1)) {
-            $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>";
-        // '<a href="../Views/Recherche.php?critere=' . $genres[$i]->genre() . '</a>';
-        } else {
-            $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>" . ' - ';
+    if($genres !=null)
+    {
+        for ($i = 0; $i < count($genres); $i++) {
+            //M'évitera d'avoir une virgule à la fin
+            if ($i == (count($genres)-1)) {
+                $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>";
+            } else {
+                $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>" . ' - ';
+            }
         }
+        return $G;
     }
-    return $G;
+    else return "Aucun genre pour cet oeuvre";
     // foreach ($genres as $key =>$genre) {
     //     echo $genre->genre(). ', ';
     // };
+}
+//Genre
+function ajoutGenre()
+{
+    $db = connection();
+    $GenreManager = new GenreManager($db);
+    $G = "";
+    $Genre = new Genre(array("codeOeuvre"=> "aka1", "genre"=>"Action"));
+    $genres = $GenreManager->ajouterGenre($Genre);
+    if($genres !=null)
+    {
+        echo  $genres;
+    }
+    else
+    {
+       echo "nene";
+    }
+    // else return "Aucun genre pour cet oeuvre";
 }
 
 //Images d'une oeuvre
