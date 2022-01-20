@@ -77,6 +77,13 @@ function note($note)
     }
     return $etoiles;
 }
+//Fond lors de l'ajout
+function couleur()
+{
+    $couleur = ["green","yellow","blue","black","red","blue","darkmagenta","purple","orange","pink","Gainsboro","gray","khaki","lime","tomato","purple","thistle","Salmon" ];
+    $rand = rand(0, (count($couleur)-1));
+    echo $couleur[$rand];
+}
 
 //Carousel Index
 
@@ -173,7 +180,7 @@ function genre()
         //M'évitera d'avoir une virgule à la fin
         if ($i == (count($genres)-1)) {
             $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>";
-            // '<a href="../Views/Recherche.php?critere=' . $genres[$i]->genre() . '</a>';
+        // '<a href="../Views/Recherche.php?critere=' . $genres[$i]->genre() . '</a>';
         } else {
             $G .= "<a href='../Views/Recherche.php?critere=". $genres[$i]->genre() . "'>" . $genres[$i]->genre() . "</a>" . ' - ';
         }
@@ -182,4 +189,29 @@ function genre()
     // foreach ($genres as $key =>$genre) {
     //     echo $genre->genre(). ', ';
     // };
+}
+
+//Images d'une oeuvre
+function Images()
+{
+    $bd = connection();
+
+    $ImageManager = new ImageManager($bd);
+    $results=$ImageManager->Images("aka1");
+    foreach ($results as $key =>$value) {
+        echo "<img src='" . $value->bin() . "' />";
+    }
+}
+
+//Ajout d'un nouvel oeuvre
+function ajoutOeuvre(Oeuvre $Oeuvre)
+{
+    try {
+        $db = connection();
+        $OeuvreManager = new OeuvreManager($db);
+        $OeuvreManager->ajoutOeuvre($Oeuvre);
+        return true;
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
 }

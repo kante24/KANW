@@ -29,6 +29,7 @@ class AnimeManager
         return $animes;
     }
 
+
     public function recherche($critere)
     {
         // $req=$this->_db->query("SELECT * FROM animes WHERE (titre like '%$critere%' or auteur like '%$critere%' or codeAnime like '%$critere%')  ORDER BY titre ASC");
