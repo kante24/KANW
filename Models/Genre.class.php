@@ -20,7 +20,7 @@ class Genre
     }
     public function codeOeuvre()
     {
-        return $this->_codeAnime;
+        return $this->_codeOeuvre;
     }
     public function genre()
     {
@@ -33,9 +33,9 @@ class Genre
     {
         $this->_idGenre = $idGenre;
     }
-    public function setCodeOeuvre($codeAnime)
+    public function setCodeOeuvre($codeOeuvre)
     {
-        $this->_codeAnime = $codeAnime;
+        $this->_codeOeuvre = $codeOeuvre;
     }
     public function setGenre($genre)
     {

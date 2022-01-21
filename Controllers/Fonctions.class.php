@@ -194,22 +194,20 @@ function genre()
     // };
 }
 //Genre
-function ajoutGenre()
+function ajoutGenre(Genre $Genre)
 {
     $db = connection();
     $GenreManager = new GenreManager($db);
-    $G = "";
-    $Genre = new Genre(array("codeOeuvre"=> "aka1", "genre"=>"Action"));
+    // $Genre = new Genre(array("codeOeuvre"=> "aka1", "genre"=>"Ation"));
     $genres = $GenreManager->ajouterGenre($Genre);
     if($genres !=null)
     {
-        echo  $genres;
+        return "Ce genre existe déjà";
     }
-    else
+    else if($genres == null)
     {
-       echo "nene";
+
     }
-    // else return "Aucun genre pour cet oeuvre";
 }
 
 //Images d'une oeuvre

@@ -35,12 +35,12 @@ class GenreManager
         $code = $Genre->codeOeuvre();
         $genre = $Genre->genre();
 
-        // $req=$this->_db->query("INSERT INTO genre (codeOeuvre, genre) VALUES ('$code', '$genre')");
         $req=$this->_db->query("SELECT * FROM genre WHERE genre = '$genre' ");
-        if($req->fetch(PDO::FETCH_ASSOC) == null)
-        {
+        if ($req->fetch(PDO::FETCH_ASSOC) != null) {
             return $genre;
-        }
-        else return null;
+        } else {
+            $req=$this->_db->query("INSERT INTO genre (codeOeuvre, genre) VALUES ('$code', '$genre')");
+            $req->execute();
+        };
     }
 }
