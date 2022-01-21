@@ -90,7 +90,7 @@ require("../Controllers/Fonctions.class.php");
                     <script>
                         window.location.replace("/dashboard/KAMW/Views/AjoutOeuvre.php");
                     </script>';
-            }
+                }
         }
         ?>
 
@@ -102,6 +102,6 @@ require("../Controllers/Fonctions.class.php");
 <?php
 
     if (isset($_POST['ajoutGenre'])) {
-        
+        echo "nnene";
     }
 ?>
