@@ -196,17 +196,13 @@ function genre()
 //Genre
 function ajoutGenre(Genre $Genre)
 {
+    // echo "insertion";
+
     $db = connection();
     $GenreManager = new GenreManager($db);
-    // $Genre = new Genre(array("codeOeuvre"=> "aka1", "genre"=>"Ation"));
-    $genres = $GenreManager->ajouterGenre($Genre);
-    if($genres !=null)
+    if($GenreManager->ajouterGenre($Genre) !=null)
     {
         return "Ce genre existe déjà";
-    }
-    else if($genres == null)
-    {
-
     }
 }
 

@@ -125,6 +125,7 @@ require("../Controllers/Fonctions.class.php");
 
 <?php
 
+//Ajout nouvelle oeuvre
 if (isset($_POST['ajout'])) {
 
     //Test pour champs vide(s)

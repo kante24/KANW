@@ -37,7 +37,7 @@ require("../Controllers/Fonctions.class.php");
         if (isset($_GET['ajout'])) {
             if ($_GET['ajout'] == "true") {
                 ?>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <form method="post">
 
             <div class="container" style="background-color: <?couleur() ?> ;border-radius: 10%; margin-top: 70px;width:1000px; text-align: center;">
 
@@ -85,12 +85,20 @@ require("../Controllers/Fonctions.class.php");
             </div>
         </form>
         <?php
+        if (isset($_POST['ajoutGenre'])) {
+            if (empty($_POST['genre'])) {
+                echo "<div style='text-align:center;margin-top:30px'><h4>Veuillez donner un genre</h4></div>";
+            } else {
+                $genre = new Genre(array("codeOeuvre" => $_GET["code"], "genre"=>$_POST["genre"]));
+                echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutGenre($genre) . "</h4>";
+            }
+        }
             } elseif ($_GET['ajout'] !== 'true') {
                 echo'
                     <script>
                         window.location.replace("/dashboard/KAMW/Views/AjoutOeuvre.php");
                     </script>';
-                }
+            }
         }
         ?>
 
@@ -98,10 +106,3 @@ require("../Controllers/Fonctions.class.php");
     </body>
 
     </html>
-
-<?php
-
-    if (isset($_POST['ajoutGenre'])) {
-        echo "nnene";
-    }
-?>
