@@ -89,8 +89,11 @@ require("../Controllers/Fonctions.class.php");
             if (empty($_POST['genre'])) {
                 echo "<div style='text-align:center;margin-top:30px'><h4>Veuillez donner un genre</h4></div>";
             } else {
-                $genre = new Genre(array("codeOeuvre" => $_GET["code"], "genre"=>$_POST["genre"]));
-                echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutGenre($genre) . "</h4>";
+                $codeOeuvre = $_GET["code"];
+                $genre = $_POST["genre"];
+                $codeGenre = substr($codeOeuvre, 0, 3) . substr($genre, 0, 3) . rand(0, 9999999999999);
+                $Genre = new Genre(array("codeGenre" => $codeGenre, "codeOeuvre" => $codeOeuvre, "genre"=>$genre ));
+                echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutGenre($Genre) . "</h4>";
             }
         }
             } elseif ($_GET['ajout'] !== 'true') {

@@ -28,7 +28,7 @@
     echo'</div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-        <a href=#><img style="width: 500px;height: 800px;" src="/dashboard/KAMW/Images/'. $results[$rand]->image(). '" class="d-block w-100" alt="..."/></a>
+        <a href=/dashboard/KAMW/Views/Recherche.php?code=' . $results[$rand]->codeOeuvre() . '><img style="width: 500px;height: 800px;" src="/dashboard/KAMW/Images/'. $results[$rand]->image(). '" class="d-block w-100" alt="..."/></a>
         <div class="carousel-caption d-none d-md-block">
             <h5>' . $results[$rand]->titre() . '</h5>
             <p>' . note($results[$rand]->note()) . '</p>
@@ -37,7 +37,7 @@
         //Les autre item
         for ($i=0; $i<count($results); $i++) {
             echo '<div class="carousel-item">
-            <a href=#><img  style="width: 400px;height: 800px;" src="/dashboard/KAMW/Images/'. $results[$i]->image() . '" class="d-block w-100" alt="..."/></a>
+            <a href=/dashboard/KAMW/Views/Recherche.php?code=' . $results[$i]->codeOeuvre() . '><img  style="width: 400px;height: 800px;" src="/dashboard/KAMW/Images/'. $results[$i]->image() . '" class="d-block w-100" alt="..."/></a>
             <div class="carousel-caption d-none d-md-block">
             <h5>' . $results[$i]->titre() . '</h5>
             <p>' . note($results[$i]->note()) . '</p>

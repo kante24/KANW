@@ -2,7 +2,7 @@
 
 class Genre
 {
-    private $_idGenre;
+    private $_codeGenre;
     private $_codeOeuvre;
     private $_genre;
 
@@ -14,9 +14,9 @@ class Genre
 
 
     //Getters
-    public function idGenre()
+    public function codeGenre()
     {
-        return $this->_idGenre;
+        return $this->_codeGenre;
     }
     public function codeOeuvre()
     {
@@ -29,9 +29,9 @@ class Genre
 
 
     //definition des setters
-    public function setIdGenre($idGenre)
+    public function setCodeGenre($codeGenre)
     {
-        $this->_idGenre = $idGenre;
+        $this->_codeGenre = $codeGenre;
     }
     public function setCodeOeuvre($codeOeuvre)
     {
