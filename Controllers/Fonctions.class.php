@@ -141,7 +141,7 @@ function afficherAnime()
 
         $form ='<div style="width: 1550px; margin-left: 100px;" >
 
-                <div style="width: 400px;float: left;margin-top: 50px ; margin-right : 50px">
+                <div style="width: 500px;float: left;margin-top: 50px ; margin-right : 100px">
                     <img style="width: 500px; height:500px"  src="/dashboard/KAMW/Images/' . $result[0]->image() . '" alt="' . $result[0]->image() . '" /> 
                 </div>
 
@@ -207,15 +207,23 @@ function ajoutGenre(Genre $Genre)
 }
 
 //Images d'une oeuvre
-function Images()
+function Images(Oeuvre $Oeuvre)
 {
     $bd = connection();
-
     $ImageManager = new ImageManager($bd);
-    $results=$ImageManager->Images("aka1");
-    foreach ($results as $key =>$value) {
-        echo "<img src='" . $value->bin() . "' />";
+    $results=$ImageManager->Images($Oeuvre);
+    $rand = rand(0, (count($results)-1));
+    // foreach ($results as $key =>$value) {
+    //     echo "<img src='" . $value->bin() . "' />";
+    // }
+    // for ($i=0; $i<count($results); $i++) {
+    //     echo "<img src='" . $results[$i]->bin() . "' />";
+    // }
+    if($results !== null)
+    {
+        return $results;
     }
+    else return null;
 }
 
 //Ajout d'un nouvel oeuvre

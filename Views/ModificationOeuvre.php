@@ -1,5 +1,5 @@
 <?php
-require("../Controllers/Fonctions.class.php");
+require("/Applications/XAMPP/xamppfiles/htdocs/dashboard/KAMW/Controllers/Fonctions.class.php");
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -32,56 +32,97 @@ require("../Controllers/Fonctions.class.php");
 
     <body>
 
-        <?php require("../Views/haut.php");
+        <?php require("/Applications/XAMPP/xamppfiles/htdocs/dashboard/KAMW/Views/haut.php");
 
         if (isset($_GET['ajout'])) {
             if ($_GET['ajout'] == "true") {
                 ?>
         <form method="post">
 
-            <div class="container" style="background-color: <?couleur() ?> ;border-radius: 10%; margin-top: 70px;width:1000px; text-align: center;">
+            <div class="container" style="border-radius: 10%; margin-top: 70px;width:1000px; text-align: center;">
 
                 <div class="row">
 
-                    <div class="row">
-                        <div class="col textCenter">
-                            <h4 style="background-color:white">Genres</h4>
-                            <div class="row">
-                                <div class="col">
+                    <div class="col-6 textCenter" style="background-color: <?couleur() ?>">
+                        <h4 style="background-color:white;margin-top: 10px">Genres</h4>
+                        <div class="row">
+                            <div class="col">
 
-                                    <div class="row">
-                                        <div class="col form-floating" style="margin-top:30px">
-                                            <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="genre" placeholder="GENRE">
-                                            <label for="floatingInput" style="text-align:center">GENRE À AJOUTER</label>
-                                        </div>
+                                <div class="row">
+                                    <div class="col form-floating" style="margin-top:30px">
+                                        <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="genre" placeholder="GENRE">
+                                        <label for="floatingInput" style="text-align:center">GENRE À AJOUTER</label>
+                                    </div>
 
-                                        <div class="col form-floating" style="margin-top:30px">
-                                            <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutGenre">
+                                    <div class="col form-floating" style="margin-top:30px">
+                                        <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutGenre">
                                                 Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
                                             </button>
-                                        </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col textCenter" style="margin-top:30px">
-                                            <h4>
-                                                <?echo genre()?>
-                                            </h4>
-                                        </div>
-                                    </div>
-
                                 </div>
+
+                                <div class="row">
+                                    <div class="col textCenter" style="margin-top:30px">
+                                        <h4>
+                                            <?echo genre()?>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 50px">
+
+                    <div class="col-6"></div>
+
+                    <div class="col-6 textCenter" style="background-color: <?couleur() ?>">
+
+                        <h4 style="background-color:white; margin-top: 10px">Image à AJouter</h4>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="floatingInput" style="vertical-align:top; margin-top: 10px;text-align: center; background-color: white;" type="file" name="genre" placeholder="GENRE">
                             </div>
                         </div>
 
-                        <div class="col"></div>
+                        <div class="col form-floating" style="margin-top:20px; margin-bottom: 10px;">
+                            <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutGenre">
+                                    Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
+                                </button>
+                        </div>
                     </div>
 
+                </div>
 
-                    <div class="row"></div>
+                <div class="row" style="margin-top: 50px">
 
+                    <div class="col-6 textCenter" style="background-color: <?couleur() ?>">
+
+                        <h4 style="background-color:white; margin-top: 10px;">Images</h4>
+
+                        <div class="row">
+                            <div class="col">
+                                images
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
+
+
+                <div class="row" style="margin-top: 50px">
+                    <div class="col-12 form-floating" style="margin-top:30px">
+                        <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="fin">
+                            Terminer  <img src="https://www.kindpng.com/picc/m/721-7212637_done-icon-white-png-transparent-png.png" style="width: 20px; height: 20px; background-color: green;";/>
+                        </button>
+                    </div>
+                </div>
+
+
             </div>
         </form>
         <?php
@@ -103,6 +144,8 @@ require("../Controllers/Fonctions.class.php");
                     </script>';
             }
         }
+
+        
         ?>
 
 

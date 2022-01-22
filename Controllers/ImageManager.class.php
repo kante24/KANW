@@ -19,9 +19,10 @@ class ImageManager
         return $this->_db = $db;
     }
 
-    public function images($codeAnime)
+    public function images(Oeuvre $Oeuvre)
     {
-        $req=$this->_db->query("SELECT * FROM images WHERE codeAnime = '$codeAnime' ");
+        $codeOeuvre = $Oeuvre->codeOeuvre();
+        $req=$this->_db->query("SELECT * FROM images WHERE codeOeuvre = '$codeOeuvre' ");
         $images= array();
         while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
             $images[] = new Image($data);

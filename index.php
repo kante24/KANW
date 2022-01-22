@@ -11,6 +11,8 @@
 <body>
     <?php require("./Views/haut.php");
     require("./Controllers/Fonctions.class.php");
+    // $Oeuvre = new Oeuvre(array("codeOeuvre"=>"aka1"));
+    // echo count(Images($Oeuvre));
     $bd = connection();
     $AnimeManager = new AnimeManager($bd);
     $results=$AnimeManager->Animes();
