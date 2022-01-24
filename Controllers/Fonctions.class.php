@@ -34,6 +34,14 @@ function dateToday()
     return $date;
 }
 
+function Refresh()
+{
+    $code = $_GET["code"];
+    echo'<script>
+            window.location.replace("/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code='.$code.'");
+        </script>';
+}
+
 //Liste de tous les animes
 function ListeAnimes()
 {
@@ -176,8 +184,7 @@ function genre()
     $GenreManager = new GenreManager($db);
     $G = "";
     $genres = $GenreManager->genre($_GET["code"]);
-    if($genres !=null)
-    {
+    if ($genres !=null) {
         for ($i = 0; $i < count($genres); $i++) {
             //M'évitera d'avoir une virgule à la fin
             if ($i == (count($genres)-1)) {
@@ -187,8 +194,9 @@ function genre()
             }
         }
         return $G;
+    } else {
+        return "Aucun genre pour cet oeuvre";
     }
-    else return "Aucun genre pour cet oeuvre";
     // foreach ($genres as $key =>$genre) {
     //     echo $genre->genre(). ', ';
     // };
@@ -196,12 +204,9 @@ function genre()
 //Genre
 function ajoutGenre(Genre $Genre)
 {
-    // echo "insertion";
-
     $db = connection();
     $GenreManager = new GenreManager($db);
-    if($GenreManager->ajouterGenre($Genre) !=null)
-    {
+    if ($GenreManager->ajouterGenre($Genre) !=null) {
         return "Ce genre existe déjà";
     }
 }
@@ -213,17 +218,30 @@ function Images(Oeuvre $Oeuvre)
     $ImageManager = new ImageManager($bd);
     $results=$ImageManager->Images($Oeuvre);
     $rand = rand(0, (count($results)-1));
-    // foreach ($results as $key =>$value) {
-    //     echo "<img src='" . $value->bin() . "' />";
-    // }
-    // for ($i=0; $i<count($results); $i++) {
-    //     echo "<img src='" . $results[$i]->bin() . "' />";
-    // }
-    if($results !== null)
-    {
-        return $results;
+    if ($results != null) {
+        $div = '<div class="container">
+                    <div class="row">';
+        for ($i=0; $i<count($results); $i++) {
+            $div .= '   <div class="col mb-4">
+                            <img style="width:100px;height:100px" src="data:image/jpeg;base64,'.base64_encode($results[$i]->bin()) .'" />
+                        </div>';
+        }
+        $div .= '   </div>
+                </div>';
+        return $div;
+    } else {
+        return "Auncune image pour cette Oeuvre";
     }
-    else return null;
+}
+
+function ajoutImage(Image $Image)
+{
+    $db = connection();
+    $ImageManager = new ImageManager($db);
+    if ($ImageManager->ajoutImage($Image) !=null) {
+        return "Cette image existe déjà";
+    }
+    Refresh();
 }
 
 //Ajout d'un nouvel oeuvre
