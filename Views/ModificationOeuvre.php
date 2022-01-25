@@ -112,8 +112,8 @@ require("/Applications/XAMPP/xamppfiles/htdocs/dashboard/KAMW/Controllers/Foncti
                                 <div class="col">
                                     <?
                                     $codeOeuvre = $_GET["code"];
-                                    $Oeuvre = new Oeuvre(array("codeOeuvre"=>$codeOeuvre));
-                                    echo Images($Oeuvre);
+                                    $Image = new Image(array("codeOeuvre"=>$codeOeuvre));
+                                    echo Images($Image);
                                     ?>
                                 </div>
                             </div>

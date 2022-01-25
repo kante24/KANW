@@ -146,21 +146,23 @@ function afficherAnime()
                 </h1>
                 ";
         $form = "";
-
+        $Image = new Image(array("codeOeuvre"=>$result[0]->codeOeuvre()));
+        // <img style="width: 500px; height:500px"  src="/dashboard/KAMW/Images/' . $result[0]->image() . '" alt="' . $result[0]->image() . '" /> 
         $form ='<div style="width: 1550px; margin-left: 100px;" >
 
                 <div style="width: 500px;float: left;margin-top: 50px ; margin-right : 100px">
-                    <img style="width: 500px; height:500px"  src="/dashboard/KAMW/Images/' . $result[0]->image() . '" alt="' . $result[0]->image() . '" /> 
+                    ' . Images($Image) . '
                 </div>
 
 
-                <div style="width: 400px;float: left;margin-top: 50px ;height:500px" class="shadow-lg p-3 mb-5 bg-body rounded">
+                <div style="width: 400px;float: left;margin-top: 50px ;" class="shadow-lg p-3 mb-5 bg-body rounded">
                     <table style=" height:500px">
                         <tr> <td style="text-align: right;"> Nom Auteur:</td>  <td>'  . $result[0]->auteur() . '</td> </tr>
                         <tr> <td style="text-align: right;"> Titre:</td>  <td> ' . $result[0]->titre() . '</td> </tr>
                         <tr> <td style="text-align: right;"> Note:</td>  <td>' . note($result[0]->note()) . '</td> </tr>
                         <tr> <td colspan="2"><b>'.  $genre . '</b></td> </tr>
                     </table>
+                    <a href="/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code=' . $result[0]->codeOeuvre() .'"><button>Modifier</button></a>
                 </div>
 
 
@@ -212,11 +214,11 @@ function ajoutGenre(Genre $Genre)
 }
 
 //Images d'une oeuvre
-function Images(Oeuvre $Oeuvre)
+function Images(Image $Image)
 {
     $bd = connection();
     $ImageManager = new ImageManager($bd);
-    $results=$ImageManager->Images($Oeuvre);
+    $results=$ImageManager->Images($Image);
     $rand = rand(0, (count($results)-1));
     if ($results != null) {
         $div = '<div class="container">

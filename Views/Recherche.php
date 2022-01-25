@@ -20,11 +20,7 @@ require("../Controllers/Fonctions.class.php");
     <body>
         <?php require("../Views/haut.php"); ?>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col" style="margin-bottom: 100px; text-align: right;">
-                    a
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col" style="text-align: center;">
                     <?php
@@ -35,6 +31,8 @@ require("../Controllers/Fonctions.class.php");
 
                 //Afficher oeuvre selecionné
                 else if(isset($_GET["code"])) {
+                    $Images = new Image(array("codeOeuvre"=>$_GET["code"]));
+                    echo Images($Images);
                     // echo "Manger nene";
                     afficherAnime();
                 }
