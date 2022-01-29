@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <h1 class="a">Nene</h1>
     <?php require("./Views/haut.php");
     require("./Controllers/Fonctions.class.php");
     // $Oeuvre = new Oeuvre(array("codeOeuvre"=>"aka1"));

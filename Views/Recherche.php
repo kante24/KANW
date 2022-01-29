@@ -1,10 +1,5 @@
 <?php
 require("../Controllers/Fonctions.class.php");
-// session_start();
-// if (!isset($_SESSION['connexion'])) {
-//     header('Location: Recherche.php');
-//     exit;
-// }
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -32,8 +27,7 @@ require("../Controllers/Fonctions.class.php");
                 //Afficher oeuvre selecionné
                 else if(isset($_GET["code"])) {
                     $Images = new Image(array("codeOeuvre"=>$_GET["code"]));
-                    echo Images($Images);
-                    // echo "Manger nene";
+                    
                     afficherAnime();
                 }
           

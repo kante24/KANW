@@ -11,6 +11,8 @@ class Oeuvre
     private $_note;
     private $_image;
     private $_auteur;
+    private $_derniereLecture;
+    private $_adulte;
 
 
     public function __construct(array $donnees)
@@ -56,6 +58,14 @@ class Oeuvre
     {
         return $this->_type;
     }
+    public function derniereLecture()
+    {
+        return $this->_derniereLecture;
+    }
+    public function adulte()
+    {
+        return $this->_adulte;
+    }
 
 
     //definition des setters
@@ -94,6 +104,14 @@ class Oeuvre
     public function setAuteur($auteur)
     {
         $this->_auteur = $auteur;
+    }
+    public function setDerniereLecture($derniereLecture)
+    {
+        $this->_derniereLecture = $derniereLecture;
+    }
+    public function setAdulte($adulte)
+    {
+        $this->_adulte = $adulte;
     }
 
 
