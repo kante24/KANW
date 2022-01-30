@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 // Setting internal encoding for string functions
 mb_internal_encoding("UTF-8");
@@ -226,14 +226,15 @@ function Images(Image $Image)
     if ($results != null) {
         $div = '<div class="row" style="text-align:center">
                         <div class="row">
-                            <div class="col d-none d-md-block p-3">
-                                <img style="width:400px;height:400px" src="data:image/jpeg;base64,'.base64_encode($results[$rand]->bin()) .'" />
+                            <div class="col-12 d-none d-md-block p-3">
+                                <img id="main"style="max-width: 350px;height:400px" src="data:image/jpeg;base64,'.base64_encode($results[$rand]->bin()) .'" />
                             </div>
                         </div>
                     <div class="row">';
         for ($i=0; $i<count($results); $i++) {
-            $div .= '   <div class="col mb-4">
-                            <img style="width:100px;height:100px" src="data:image/jpeg;base64,'.base64_encode($results[$i]->bin()) .'" />
+            $id = $results[$i]->nom() . rand(0, 999999);
+            $div .= '   <div class="col mt-4">
+                            <img onclick="getId(this)" id="'. $id .'" style="width:100px;height:100px" src="data:image/jpeg;base64,'.base64_encode($results[$i]->bin()) .'" />
                         </div>';
         }
         $div .= '   </div></div>';

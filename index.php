@@ -7,10 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="dashboard/KAMW/style.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     <title>Accueil</title>
 </head>
 
 <body>
+    
+    <!-- <button id='1' onclick="getId(this)">Button 1</button>
+    <button id='2' onclick="getId(this)">Button 2</button>
+    <img id="img" onclick="getId(this)" src="/dashboard/KAMW/Images/K.png"/> -->
+    
     <?php require("./Views/haut.php");
     require("./Controllers/Fonctions.class.php");
     // $Oeuvre = new Oeuvre(array("codeOeuvre"=>"aka1"));
