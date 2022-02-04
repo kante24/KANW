@@ -101,27 +101,30 @@ function recherche()
     $OeuvreManager = new OeuvreManager($bd);
     $result = $OeuvreManager->recherche($_GET["critere"]);
     if ($result == null) {
-        echo "<center><br/><br/><br/><h4>Aucun anime trouvé selon ce critère</center><h4>";
+        echo "<center><br/><br/><br/><h4>Aucun oeuvre trouvé selon ce critère</center><h4>";
     } else {
-        echo '<div class="container-fluid"><div class="row" style="height: 400px;">';
+        echo '<div class="container-fluid">
+        <div class="row" style="height: 400px;margin-top:40px">';
         foreach ($result as $key =>$value) {
-            echo '<div class="col" style="text-align: center;"><br/>';
+            echo '<div class="col shadow-lg p-3 mb-5 bg-body rounded" style="text-align: center;">
+            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
+            <br/>';
             //Note
-            echo $value->type() . " - " . note($value->note());
+            echo note($value->note());
 
             //Titre et Image
             echo'
-                                <br/><br/><b>' . $value->titre() . '</b>
+                                <br/><br/>' . $value->titre() . '
                                 <div></br>
-                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 200px; height: 200px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
-                                <br/><br/>Auteur : '. $value->auteur() . '
+                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 150px; height: 150px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
                                 </div>
                                 <div>
-                                    <a href=../Views/Recherche.php?code=' . $value->codeOeuvre() .'> <input type="button" value="Afficher" style="margin-top: 40px; width: 200px;" /> </a>
+                                    <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <input type="button" value="Afficher" style="margin-top: 70px; width: 200px;" /> </a>
                                 </div>
                         </div>
                     </br></br></br>';
         }
+        echo '</div></div>';
         echo '</div></div>';
     }
 }
@@ -149,18 +152,21 @@ function afficherAnime()
 
         }
 
-        else echo "False";
-        echo"<Center>
-                <h1>
-                    <U>
-                    ". $result[0]->titre() . "
-            </U>
-                </h1>
-                ";
-        $form = "";
+        $div = '
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <h4 class="btn-dark position-relative" style="text-align: center;">
+                        ' . $result[0]->titre() . '<svg width="1em" height="1em" viewBox="0 0 16 16" class="position-absolute top-100 start-50 translate-middle mt-1 bi bi-caret-down-fill" fill="#212529" xmlns="http://www.w3.org/2000/svg"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+                    </h4>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        ';
         $Image = new Image(array("codeOeuvre"=>$result[0]->codeOeuvre()));
 
-        $div ='<div class="container mt-5" >
+        $div .='
 
                     <div class="row">
 
