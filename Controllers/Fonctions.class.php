@@ -98,8 +98,8 @@ function couleur()
 function recherche()
 {
     $bd = connection();
-    $AnimeManager = new AnimeManager($bd);
-    $result = $AnimeManager->recherche($_GET["critere"]);
+    $OeuvreManager = new OeuvreManager($bd);
+    $result = $OeuvreManager->recherche($_GET["critere"]);
     if ($result == null) {
         echo "<center><br/><br/><br/><h4>Aucun anime trouvé selon ce critère</center><h4>";
     } else {
@@ -137,6 +137,19 @@ function afficherAnime()
     if ($result == null) {
         echo "<center><br/><br/><br/><h4>Cet animé est indisponible pour l'instant</center><h4>";
     } else {
+        $adulte = false;
+        $couleur = "green";
+        $visibilite = "Tout Public";
+        //test mySql true >= 1 et false = 0
+        if($result[0]->adulte() != 0)
+        {
+            $adulte = true;
+            $couleur = "red";        
+            $visibilite = "Adulte";
+
+        }
+
+        else echo "False";
         echo"<Center>
                 <h1>
                     <U>
@@ -157,10 +170,12 @@ function afficherAnime()
 
 
                         <div class="col-4 shadow-lg p-3 mb-5 bg-body rounded">
+                            <div  style="background-color:' . $couleur . '">' . $visibilite . '</div>
                             <table style=" height:500px">
                                 <tr> <td style="text-align: right;"> Nom Auteur:</td>  <td>'  . $result[0]->auteur() . '</td> </tr>
                                 <tr> <td style="text-align: right;"> Titre:</td>  <td> ' . $result[0]->titre() . '</td> </tr>
                                 <tr> <td style="text-align: right;"> Note:</td>  <td>' . note($result[0]->note()) . '</td> </tr>
+                                <tr> <td style="text-align: right;"> Dernière Lecture:</td>  <td>' . $result[0]->derniereLecture() . '</td> </tr>
                                 <tr> <td colspan="2"><b>'.  $genre . '</b></td> </tr>
                             </table>
                             <a href="/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code=' . $result[0]->codeOeuvre() .'"><button>Modifier</button></a>

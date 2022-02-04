@@ -36,10 +36,10 @@ require("../Controllers/Fonctions.class.php");
         <!-- form pour ajout -->
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
-            <div class="container div" style="background-color: <?couleur() ?> ;border-radius: 50%;margin-top: 70px; text-align: center; width: 700px;">
+            <div class="container div" style="background-color: <?couleur() ?> ;border-radius: 50%;margin-top: 30px; text-align: center; width: 800px;">
                 <div class="row">
 
-                    <div class="col form-floating">
+                    <div class="col form-floating" style="margin-left: 90px;">
                         <input class="form-control" id="floatingInput" style="vertical-align:top; width: 200px;height:50px;text-align: center;" type="text" name="titre" placeholder="Titre">
                         <label for="floatingInput" style="text-align:center">TITRE</label>
                     </div>
@@ -72,6 +72,14 @@ require("../Controllers/Fonctions.class.php");
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                    </select>
+                </div>
+
+
+                <div class="row" style="margin: 0 auto;width: 200px; margin-top: 30px;">
+                    <select style="margin: 0 auto;text-align: center; width: 200px;" class="form-select" aria-label="Default select example" name="adulte">
+                        <option selected value=0>Tout Public</option>
+                        <option value=1>Adulte</option>
                     </select>
                 </div>
 
@@ -123,7 +131,7 @@ require("../Controllers/Fonctions.class.php");
 
     </html>
 
-<?php
+    <?php
 
 //Ajout nouvelle oeuvre
 if (isset($_POST['ajout'])) {
@@ -133,7 +141,7 @@ if (isset($_POST['ajout'])) {
         echo "<h4>Veuillez remplir tous les champs</h4>";
     } else {
         $codeOeuvre = substr($_POST['titre'], 0, 3) . substr($_POST['auteur'], 0, 3) . substr($_POST['type'], 0, 3). rand(0, 9999999999999);
-        $Oeuvre=new Oeuvre(array("titre"=>$_POST['titre'], "codeOeuvre"=>$codeOeuvre, "synopsis"=>$_POST['synopsis'], "resume"=>$_POST['resume'], "critique"=> $_POST['critique'],  "note"=> $_POST['note'], "auteur"=> $_POST['auteur'], "type"=> $_POST['type'] ));
+        $Oeuvre=new Oeuvre(array("titre"=>$_POST['titre'], "codeOeuvre"=>$codeOeuvre, "synopsis"=>$_POST['synopsis'], "resume"=>$_POST['resume'], "critique"=> $_POST['critique'],  "note"=> $_POST['note'], "auteur"=> $_POST['auteur'], "type"=> $_POST['type'], "adulte"=> $_POST['adulte'] ));
         if (ajoutOeuvre($Oeuvre) === true) {
             echo    '<script>
                             window.location.replace("/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code='. $codeOeuvre .'");

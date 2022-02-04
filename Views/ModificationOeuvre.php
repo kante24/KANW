@@ -169,6 +169,15 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
                 echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
             }
         }
+
+        //Affichage de l'element
+        if (isset($_POST['fin'])) {
+            $codeOeuvre = $_GET["code"];
+            echo'
+                <script>
+                    window.location.replace("/dashboard/KAMW/Views/Recherche.php?code=' . $codeOeuvre . '");
+                </script>';
+        }
         ?>
 
 
