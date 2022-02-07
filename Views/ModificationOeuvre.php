@@ -38,12 +38,13 @@ require("/Applications/XAMPP/xamppfiles/htdocs/dashboard/KAMW/Controllers/Foncti
         
 //Si l'element est déjà ajouté avec succès
 if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
+    
     ?>
         <form method="post" enctype="multipart/form-data">
 
             <div class="container mt-5">
 
-                <div class="row textCenter">
+                <!-- <div class="row textCenter"> -->
 
                     <div class="row textCenter">
 
@@ -89,7 +90,7 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
                             </div>
 
                             <div class="col form-floating" style="margin-top:20px; margin-bottom: 10px;">
-                                <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutImage">
+                                <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="ajoutImage" id="ajoutImage">
                                     Ajouter  <img src="https://www.pngmart.com/files/21/Add-Button-PNG-Isolated-File.png" style="width: 20px; height: 20px;";/>
                                 </button>
                             </div>
@@ -98,6 +99,25 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
                         </div>
 
                     </div>
+
+
+
+                    <div class="row mt-5 textCenter">
+
+                        <div class="col-6 textCenter">
+                            <h4>
+                                Note actuelle: <? note($note) ?>
+                            </h4>
+                        </div>
+
+
+                        <div class="col-6 textCenter">
+                            adulte
+                        </div>
+                    </div>
+
+
+
 
                     <div class="row textCenter" style="margin-top: 50px">
 
@@ -141,6 +161,34 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
             echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutGenre($Genre) . "</h4>";
         }
     }
+
+    //Fonction pour ajouter une image
+    if (isset($_POST['ajoutImage'])) {
+        if ($_FILES["image"]["name"] == null) {
+            echo'<script>
+                document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
+            </script>';
+        } else {
+            $codeOeuvre = $_GET["code"];
+            $nom = $_FILES["image"]["name"];
+            $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
+            $taille = $_FILES["image"]["size"];
+            $type = $_FILES["image"]["type"];
+            $bin = $_FILES["image"]["tmp_name"];
+            $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
+            
+            echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
+        }
+    }
+
+    //Affichage de l'element
+    if (isset($_POST['fin'])) {
+        $codeOeuvre = $_GET["code"];
+        echo'
+            <script>
+                window.location.replace("/dashboard/KAMW/Views/Recherche.php?code=' . $codeOeuvre . '");
+            </script>';
+    }
 }
         //Sinon, redirection vers ajout
          else {
@@ -151,33 +199,7 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
          }
 
 
-        //Fonction pour ajouter une image
-        if (isset($_POST['ajoutImage'])) {
-            if ($_FILES["image"]["name"] == null) {
-                echo'<script>
-                    document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
-                </script>';
-            } else {
-                $codeOeuvre = $_GET["code"];
-                $nom = $_FILES["image"]["name"];
-                $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
-                $taille = $_FILES["image"]["size"];
-                $type = $_FILES["image"]["type"];
-                $bin = $_FILES["image"]["tmp_name"];
-                $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
-                
-                echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
-            }
-        }
-
-        //Affichage de l'element
-        if (isset($_POST['fin'])) {
-            $codeOeuvre = $_GET["code"];
-            echo'
-                <script>
-                    window.location.replace("/dashboard/KAMW/Views/Recherche.php?code=' . $codeOeuvre . '");
-                </script>';
-        }
+        
         ?>
 
 

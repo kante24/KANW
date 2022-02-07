@@ -37,10 +37,39 @@ class OeuvreManager
         }catch(Exception $ex){return $ex->getMessage();}
     }
 
+    public function supressionOeuvre(Oeuvre $oeuvre)
+    {
+        try {
+            $codeOeuvre = $oeuvre->codeOeuvre();
+            $req=$this->_db->query("DELETE FROM oeuvres WHERE codeOeuvre = '$codeOeuvre' ");
+            $req->execute();
+        }catch(Exception $ex){return $ex->getMessage();}
+    }
+
 
     public function recherche($critere)
     {
         $req=$this->_db->query("SELECT * FROM oeuvres WHERE (titre like '%$critere%' or auteur like '%$critere%' or codeOeuvre like '%$critere%')  ORDER BY titre ASC");
+        $Anime= array();
+        while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
+            $Anime[] = new Anime($data);
+        }
+        return $Anime;
+    }
+
+    public function Animes()
+    {
+        $req=$this->_db->query("SELECT * FROM oeuvres WHERE type = 'Anime' ORDER BY note DESC");
+        $animes= array();
+        while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
+            $animes[] = new Anime($data);
+        }
+        return $animes;
+    }
+
+    public function afficherOeuvre($code)
+    {
+        $req=$this->_db->query("SELECT * FROM oeuvres WHERE codeOeuvre = '$code' ");
         $Anime= array();
         while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
             $Anime[] = new Anime($data);

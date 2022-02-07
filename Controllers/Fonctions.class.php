@@ -47,8 +47,8 @@ function ListeAnimes()
 {
     $bd = connection();
 
-    $AnimeManager = new AnimeManager($bd);
-    $results=$AnimeManager->Animes();
+    $OeuvreManager = new OeuvreManager($bd);
+    $results=$OeuvreManager->Animes();
     if ($results == null) {
         echo "<center>Aucun Anime disponible, Veuillez revenir ultérieurement</center>";
     } else {
@@ -132,8 +132,8 @@ function recherche()
 function afficherAnime()
 {
     $db = connection();
-    $AnimeManager = new AnimeManager($db);
-    $result = $AnimeManager->afficherAnime($_GET ["code"]);
+    $OeuvreManager = new OeuvreManager($db);
+    $result = $OeuvreManager->afficherOeuvre($_GET ["code"]);
     $genre = genre();
 
 
@@ -177,14 +177,22 @@ function afficherAnime()
 
                         <div class="col-4 shadow-lg p-3 mb-5 bg-body rounded">
                             <div  style="background-color:' . $couleur . '">' . $visibilite . '</div>
-                            <table style=" height:500px">
+                            <table style=" height:500px; text-align: center">
                                 <tr> <td style="text-align: right;"> Nom Auteur:</td>  <td>'  . $result[0]->auteur() . '</td> </tr>
                                 <tr> <td style="text-align: right;"> Titre:</td>  <td> ' . $result[0]->titre() . '</td> </tr>
                                 <tr> <td style="text-align: right;"> Note:</td>  <td>' . note($result[0]->note()) . '</td> </tr>
                                 <tr> <td style="text-align: right;"> Dernière Lecture:</td>  <td>' . $result[0]->derniereLecture() . '</td> </tr>
                                 <tr> <td colspan="2"><b>'.  $genre . '</b></td> </tr>
                             </table>
-                            <a href="/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code=' . $result[0]->codeOeuvre() .'"><button>Modifier</button></a>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="/dashboard/KAMW/Views/ModificationOeuvre.php?ajout=true&code=' . $result[0]->codeOeuvre() .'"><button style="width: 150px">Modifier</button></a>
+                                </div>
+                                <div class="col">';
+                                //Bouton avec classe sup et id = codeOeuvre récuperé avec js;
+        $div .='                     <button style="width: 150px" class="sup" id="'. $result[0]->codeOeuvre() .'">Suprimer</button>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -282,6 +290,19 @@ function ajoutOeuvre(Oeuvre $Oeuvre)
         $db = connection();
         $OeuvreManager = new OeuvreManager($db);
         $OeuvreManager->ajoutOeuvre($Oeuvre);
+        return true;
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+}
+
+//Suprimer un oeuvre
+function supOeuvre(Oeuvre $Oeuvre)
+{
+    try {
+        $db = connection();
+        $OeuvreManager = new OeuvreManager($db);
+        $OeuvreManager->supressionOeuvre($Oeuvre);
         return true;
     } catch (Exception $ex) {
         return $ex->getMessage();

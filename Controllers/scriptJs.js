@@ -11,4 +11,19 @@ $(document).ready(function() {
         $('#main').fadeIn(500);
     });
 
+    $(".sup").click(function() {
+        var code = $(this).attr('id');
+        let text = "Voulez-vous suprimer cet oeuvre?";
+        if (confirm(text) == true) {
+            //Ajout paramètre sup pour une supression
+            window.location.replace("Recherche.php?sup&code=" + code)
+        }
+    });
+
+    // $("#ajoutImage").click(function() {
+    //     var code = $(this).attr('id');
+    //     //Ajout paramètre sup pour une supression
+    //     window.location.replace("ModificationOeuvre.php?ajout=true&code=" + code)
+    // });
+
 });

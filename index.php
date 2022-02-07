@@ -24,8 +24,8 @@
     // $Oeuvre = new Oeuvre(array("codeOeuvre"=>"aka1"));
     // echo count(Images($Oeuvre));
     $bd = connection();
-    $AnimeManager = new AnimeManager($bd);
-    $results=$AnimeManager->Animes();
+    $OeuvreManager = new OeuvreManager($bd);
+    $results=$OeuvreManager->Animes();
 
 
     $rand = rand(0, (count($results)-1));

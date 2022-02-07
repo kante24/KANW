@@ -15,7 +15,7 @@ require("../Controllers/Fonctions.class.php");
     <body>
         <?php require("../Views/haut.php"); ?>
         <h4 class="btn-primary position-relative" style="width: 100px;">
-            Alerts 
+            Alerts
             <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
         </h4>
         <div class="container-fluid">
@@ -34,14 +34,30 @@ require("../Controllers/Fonctions.class.php");
                     
                     afficherAnime();
                 }
+
+                //Supression si parametre sup
+                if(isset($_GET["sup"])) {
+                    $code = $_GET["code"];
+                    $Oeuvre = new Oeuvre(array("codeOeuvre"=>$code));
+                    if(supOeuvre($Oeuvre) == "true")
+                    {
+                        echo'
+                            <script>
+                                window.location.replace("/dashboard/KAMW/index.php");
+                            </script>';
+                    }
+                    else echo'
+                            <script>
+                                window.location.replace("/dashboard/KAMW/Views/Recherche.php?code="'. $code .');
+                            </script>';
+                }
+
           
           ?>
                 </div>
             </div>
         </div>
-        <center>
 
-        </center>
     </body>
 
     </html>
