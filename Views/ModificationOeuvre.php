@@ -164,26 +164,30 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
     }
 
     //Fonction pour ajouter une image
-    // if (isset($_POST['ajoutImage'])) {
-    //     if ($_FILES["image"]["name"] == null) {
-    //         echo'<script>
-    //             document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
-    //         </script>';
-    //     } else {
-    //         $codeOeuvre = $_GET["code"];
-    //         $nom = $_FILES["image"]["name"];
-    //         $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
-    //         $taille = $_FILES["image"]["size"];
-    //         $type = $_FILES["image"]["type"];
-    //         $bin = $_FILES["image"]["tmp_name"];
-    //         $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
+    if (isset($_POST['ajoutImage'])) {
+        if ($_FILES["image"]["name"] == null) {
+            echo'<script>
+                document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
+            </script>';
+        } else {
+            $codeOeuvre = $_GET["code"];
+            $nom = $_FILES["image"]["name"];
+            $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
+            $taille = $_FILES["image"]["size"];
+            $type = $_FILES["image"]["type"];
+            $bin = $_FILES["image"]["tmp_name"];
+            $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
             
-    //         // echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
-    //         echo'<script>
-    //             document.getElementById("txtImage").innerHTML = "'.ajoutImage($Image).'"
-    //         </script>';
-    //     }
-    // }
+            echo'<script>
+                document.getElementById("txtImage").innerHTML = "'.ajoutImage($Image).'"
+            </script>';
+            // echo"<script>
+            // setTimeout(function(){
+            //     window.location.href = '/dashboard/KAMW/Views/Recherche.php';
+            //  }, 1000);
+            // </script>";
+        }
+    }
 
     //Affichage de l'element
     if (isset($_POST['fin'])) {

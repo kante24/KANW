@@ -20,12 +20,12 @@ $(document).ready(function() {
         }
     });
 
-    $("#ajoutImage").click(function() {
-        var code = $(this).attr('id');
-        //Ajout paramètre sup pour une supression
-        // window.location.href(("ModificationOeuvre.php?ajout=true&code=" + code), 1000)
-        window.location.replace("/dashboard/KAMW/Images/Views/Recherche.php")
+    // $("#ajoutImage").click(function() {
+    //     var code = $(this).attr('id');
+    //     //Ajout paramètre sup pour une supression
+    //     // window.location.href(("ModificationOeuvre.php?ajout=true&code=" + code), 1000)
+    //     window.location.replace("/dashboard/KAMW/Images/Views/Recherche.php")
 
-    });
+    // });
 
 });
