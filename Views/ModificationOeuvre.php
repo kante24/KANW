@@ -95,7 +95,8 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
                                 </button>
                             </div>
 
-                            <h4 id="txtImage"></h4>
+                            <!-- Text pour erreur ajout image -->
+                            <h4 class="mt-3" id="txtImage"></h4>
                         </div>
 
                     </div>
@@ -106,7 +107,7 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
 
                         <div class="col-6 textCenter">
                             <h4>
-                                Note actuelle: <? note($note) ?>
+                                Note actuelle: <? echo note(5) ?>
                             </h4>
                         </div>
 
@@ -134,7 +135,7 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
                     </div>
 
 
-                    <div class="row" style="margin-top: 50px">
+                    <div class="row textCenter" style="margin-top: 50px">
                         <div class="col-12 form-floating" style="margin-top:30px">
                             <button class="btn btn-success" type="submit" style="margin: 0 auto;width: 200px;" name="fin">
                             Terminer  <img src="https://www.kindpng.com/picc/m/721-7212637_done-icon-white-png-transparent-png.png" style="width: 20px; height: 20px; background-color: green;";/>
@@ -163,23 +164,26 @@ if (isset($_GET['ajout']) && $_GET['ajout'] == "true") {
     }
 
     //Fonction pour ajouter une image
-    if (isset($_POST['ajoutImage'])) {
-        if ($_FILES["image"]["name"] == null) {
-            echo'<script>
-                document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
-            </script>';
-        } else {
-            $codeOeuvre = $_GET["code"];
-            $nom = $_FILES["image"]["name"];
-            $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
-            $taille = $_FILES["image"]["size"];
-            $type = $_FILES["image"]["type"];
-            $bin = $_FILES["image"]["tmp_name"];
-            $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
+    // if (isset($_POST['ajoutImage'])) {
+    //     if ($_FILES["image"]["name"] == null) {
+    //         echo'<script>
+    //             document.getElementById("txtImage").innerHTML = "Veuillez choisir une image à ajouter"
+    //         </script>';
+    //     } else {
+    //         $codeOeuvre = $_GET["code"];
+    //         $nom = $_FILES["image"]["name"];
+    //         $codeImage = substr($codeOeuvre, 0, 3) . substr($nom, 0, 3) . rand(0, 9999999999999);
+    //         $taille = $_FILES["image"]["size"];
+    //         $type = $_FILES["image"]["type"];
+    //         $bin = $_FILES["image"]["tmp_name"];
+    //         $Image = new Image(array("codeImage"=>$codeImage, "codeOeuvre"=>$codeOeuvre, "nom"=>$nom, "taille"=>$taille, "type"=>$type, "bin"=>$bin));
             
-            echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
-        }
-    }
+    //         // echo "<div style='text-align:center;margin-top:30px'><h4>" . ajoutImage($Image) . "</h4>";
+    //         echo'<script>
+    //             document.getElementById("txtImage").innerHTML = "'.ajoutImage($Image).'"
+    //         </script>';
+    //     }
+    // }
 
     //Affichage de l'element
     if (isset($_POST['fin'])) {
