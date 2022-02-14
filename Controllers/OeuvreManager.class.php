@@ -62,9 +62,29 @@ class OeuvreManager
         $req=$this->_db->query("SELECT * FROM oeuvres WHERE type = 'Anime' ORDER BY note DESC");
         $animes= array();
         while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
-            $animes[] = new Anime($data);
+            $animes[] = new Oeuvre($data);
         }
         return $animes;
+    }
+
+    public function Webtoons()
+    {
+        $req=$this->_db->query("SELECT * FROM oeuvres WHERE type = 'Webtoon' ORDER BY note DESC");
+        $webtoon= array();
+        while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
+            $webtoon[] = new Oeuvre($data);
+        }
+        return $webtoon;
+    }
+
+    public function Mangas()
+    {
+        $req=$this->_db->query("SELECT * FROM oeuvres WHERE type = 'Manga' ORDER BY note DESC");
+        $manga= array();
+        while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
+            $manga[] = new Oeuvre($data);
+        }
+        return $manga;
     }
 
     public function afficherOeuvre($code)
@@ -72,7 +92,7 @@ class OeuvreManager
         $req=$this->_db->query("SELECT * FROM oeuvres WHERE codeOeuvre = '$code' ");
         $Anime= array();
         while ($data=$req->fetch(PDO::FETCH_ASSOC)) {
-            $Anime[] = new Anime($data);
+            $Anime[] = new Oeuvre($data);
         }
         return $Anime;
     }

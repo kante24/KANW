@@ -10,14 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
+
     <title>Accueil</title>
 </head>
 
 <body>
-    
-    <!-- <button id='1' onclick="getId(this)">Button 1</button>
-    <button id='2' onclick="getId(this)">Button 2</button>
-    <img id="img" onclick="getId(this)" src="/dashboard/KAMW/Images/K.png"/> -->
+<div class="mydiv">The background-color changes in time</div>
     
     <?php require("./Views/haut.php");
     require("./Controllers/Fonctions.class.php");
@@ -66,6 +64,26 @@
             <span class="visually-hidden">Next</span>
             </button></div>'
     ?>
+
+
+<?
+    echo '    <style>
+        .mydiv {
+  width:100%;
+  height:100%;
+  color:black;
+  font-weight:bold;
+  animation: myanimation 10s infinite;
+}
+
+@keyframes myanimation {
+  0% {background-color: '. couleur() .';}
+  25%{background-color: '. couleur() .';}
+  50%{background-color: '. couleur() .';}
+  75%{background-color: '. couleur() .';}
+  100% {background-color:  '. couleur() .';}
+}
+    </style>' ?>
         
 </body>
 

@@ -74,6 +74,70 @@ function ListeAnimes()
     }
 }
 
+//Liste de tous les webtoons
+function ListeWebtoons()
+{
+    $bd = connection();
+
+    $OeuvreManager = new OeuvreManager($bd);
+    $results=$OeuvreManager->Webtoons();
+    if ($results == null) {
+        echo "<h4 class='mt-4' style='text-align:center'>Aucun Webtoon disponible, Veuillez revenir ultérieurement</h4>";
+    } else {
+        echo '<div class="container-fluid"><div class="row" style="height: 400px;margin-top:40px">';
+        foreach ($results as $key =>$value) {
+            echo '<div class="col shadow-lg p-3 mb-5 bg-body rounded" style="text-align: center;"><br/>';
+            //Note
+            echo note($value->note());
+
+            //Titre et Image
+            echo'
+                                <br/><br/>' . $value->titre() . '
+                                <div></br>
+                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 150px; height: 150px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
+                                </div>
+                                <div>
+                                    <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <input type="button" value="Afficher" style="margin-top: 70px; width: 200px;" /> </a>
+                                </div>
+                        </div>
+                    </br></br></br>';
+        }
+        echo '</div></div>';
+    }
+}
+
+//Liste de tous les webtoons
+function ListeMangas()
+{
+    $bd = connection();
+
+    $OeuvreManager = new OeuvreManager($bd);
+    $results=$OeuvreManager->Mangas();
+    if ($results == null) {
+        echo "<h4 class='mt-4' style='text-align:center'>Aucun Manga disponible, Veuillez revenir ultérieurement</h4>";
+    } else {
+        echo '<div class="container-fluid"><div class="row" style="height: 400px;margin-top:40px">';
+        foreach ($results as $key =>$value) {
+            echo '<div class="col shadow-lg p-3 mb-5 bg-body rounded" style="text-align: center;"><br/>';
+            //Note
+            echo note($value->note());
+
+            //Titre et Image
+            echo'
+                                <br/><br/>' . $value->titre() . '
+                                <div></br>
+                                <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <img style="width: 150px; height: 150px;" src="/dashboard/KAMW/Images/' . $value->image() .'" alt="' . $value->titre() . '"> </a>
+                                </div>
+                                <div>
+                                    <a href="../Views/Recherche.php?code='. $value->codeOeuvre() . '"> <input type="button" value="Afficher" style="margin-top: 70px; width: 200px;" /> </a>
+                                </div>
+                        </div>
+                    </br></br></br>';
+        }
+        echo '</div></div>';
+    }
+}
+
 //Note
 function note($note)
 {
@@ -84,12 +148,12 @@ function note($note)
     }
     return $etoiles;
 }
-//Fond lors de l'ajout
+//Retour d'une couleur au random
 function couleur()
 {
     $couleur = ["green","yellow","blue","black","red","blue","darkmagenta","purple","orange","pink","Gainsboro","gray","khaki","lime","tomato","purple","thistle","Salmon" ];
     $rand = rand(0, (count($couleur)-1));
-    echo $couleur[$rand];
+    return $couleur[$rand];
 }
 
 //Carousel Index

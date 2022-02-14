@@ -27,6 +27,26 @@ require("../Controllers/Fonctions.class.php");
                 margin-top: 20px;
             }
         </style>
+        <? 
+            // Style pour animation = changement de couleur
+            echo '    
+                <style>
+                    .div {
+                        width:100%;
+                        height:100%;
+                        font-weight:bold;
+                        animation: colorAnimation 15s infinite;
+                    }
+
+                    @keyframes colorAnimation {
+                        0% {background-color: '. couleur() .';}
+                        25%{background-color: '. couleur() .';}
+                        50%{background-color: '. couleur() .';}
+                        75%{background-color: '. couleur() .';}
+                        100% {background-color:  '. couleur() .';}
+                    }
+                </style>' 
+            ?>
 
     </head>
 
@@ -36,7 +56,7 @@ require("../Controllers/Fonctions.class.php");
         <!-- form pour ajout -->
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
-            <div class="container div" style="background-color: <?couleur() ?> ;border-radius: 50%;margin-top: 30px; text-align: center; width: 800px;">
+            <div class="container div" style="border-radius: 50%;margin-top: 30px; text-align: center; width: 800px;">
                 <div class="row">
 
                     <div class="col form-floating" style="margin-left: 90px;">

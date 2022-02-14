@@ -40,10 +40,10 @@
                         <a class="nav-link active" aria-current="page" href="/dashboard/KAMW/Views/Animes.php">Animes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mangas</a>
+                        <a class="nav-link" href="/dashboard/KAMW/Views/Mangas.php">Mangas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Webtoons</a>
+                        <a class="nav-link" href="/dashboard/KAMW/Views/Webtoons.php">Webtoons</a>
                     </li>
 
                     <!-- dropdown list for actions -->
